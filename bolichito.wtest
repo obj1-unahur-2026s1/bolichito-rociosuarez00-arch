@@ -1,0 +1,49 @@
+
+import objetos.* 
+import colores.*
+import materiales.*
+import personas.*
+import bolichito.*
+
+describe "Tests del Bolichito" {
+
+	test "Rosa prefiere cosas de 2kg o menos" {
+		placa.setPeso(1500)
+		assert.that(rosa.leGusta(placa))
+		
+		placa.setPeso(3000)
+		assert.notThat(rosa.leGusta(placa))
+	}
+
+	test "El bolichito está equilibrado cuando el mostrador pesa más que la vidriera" {
+		
+		bolichito.setVidriera(remera)
+		bolichito.setMostrador(pelota)
+		
+		assert.that(bolichito.estaEquilibrado())
+	}
+
+	test "El bolichito puede mejorar si es monocromático" {
+		
+		bolichito.setVidriera(remera) 
+		placa.setColor(rojo)
+		bolichito.setMostrador(placa)
+		
+		assert.that(bolichito.esMonocromatico())
+		assert.that(bolichito.siPuedeMejorar())
+	}
+
+	test "Cajita con un objeto adentro aumenta su peso" {
+		cajita.setObjetoAdentro(pelota)
+        assert.equals(1700, cajita.peso())
+		assert.that(rosa.leGusta(cajita))
+	}
+
+	test "Juan reconoce colores no fuertes o peso en rango" {
+		
+		assert.that(juan.leGusta(muñeco))
+		
+		
+		assert.notThat(juan.leGusta(biblioteca))
+	}
+}
